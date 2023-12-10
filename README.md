@@ -1,2 +1,2 @@
-# vuls-reproduce
-Reproduction processes and POCs of the vulnerability found by me.
+# Bug Reports
+Reproduction processes and POCs of the vulnerabilities found by me.
