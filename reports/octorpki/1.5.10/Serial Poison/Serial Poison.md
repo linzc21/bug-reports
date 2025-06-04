@@ -32,5 +32,10 @@ At line 304, the following loop is used: `for serial = lastSerial + 1; serial <=
 In addition, at line 240, the following condition is used: `lastSerial == 0 || lastSessionID != curSessionID || missingFiles`. Since none of the conditions are met — `lastSerial` is not zero, the `session_id` has not changed, and `delta.xml` is not missing — octorpki will also skip fetching the snapshot.
 Together, these conditions cause octorpki to stuck in a stale state, even when the repository is updated with new ROAs.
 
+**Reproduce video:**  
+https://github.com/user-attachments/assets/36218145-ce08-4526-9d61-4deea3bca031
+
+
+
 ## Summary:
 OctoRPKI becomes stuck in a stale state when the RRDP `notification.xml` contains an abnormally large `serial` value. Even if the repository is subsequently updated and the serial is restored to a normal value, OctoRPKI will **refuse to re-fetch either the snapshot or any deltas**, resulting in the continuous use of **permanently stale and outdated VRPs**. **This behavior may impact the integrity of VRP data and undermine the availability of Route Origin Validation (ROV) as a defense against route hijacking.**
